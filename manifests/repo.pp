@@ -83,9 +83,7 @@ class galera::repo(
               'id'     => $apt_percona_repo_key,
               'server' => $apt_percona_repo_key_server,
             },
-            include  => {
-              'src' => $apt_percona_repo_include_src,
-            },
+            include_src => $apt_percona_repo_include_src,
           }
         } elsif ($repo_vendor == 'mariadb') {
           apt::source { 'galera_mariadb_repo':
@@ -96,10 +94,8 @@ class galera::repo(
               'id'     => $apt_mariadb_repo_key,
               'server' => $apt_mariadb_repo_key_server,
             },
-            include  => {
-              'src' => $apt_mariadb_repo_include_src,
-            },
-            notify   => Exec['apt_update'],
+            include_src => $apt_mariadb_repo_include_src,
+            notify      => Exec['apt_update'],
           }
         } elsif ($repo_vendor == 'codership') {
           apt::source { 'galera_codership_repo':
@@ -110,10 +106,8 @@ class galera::repo(
               'id'     => $apt_codership_repo_key,
               'server' => $apt_codership_repo_key_server,
             },
-            include  => {
-              'src' => $apt_codership_repo_include_src,
-            },
-            notify   => Exec['apt_update'],
+            include_src => $apt_codership_repo_include_src,
+            notify      => Exec['apt_update'],
           }
 
           $wsrep_release = (($::lsbdistcodename == 'xenial') and
@@ -130,9 +124,7 @@ class galera::repo(
               'id'     => $apt_codership_repo_key,
               'server' => $apt_codership_repo_key_server,
             },
-            include  => {
-              'src' => $apt_codership_repo_include_src,
-            },
+            include_src => $apt_codership_repo_include_src,
             notify   => Exec['apt_update'],
           }
           Exec['apt_update'] -> Package<||>
