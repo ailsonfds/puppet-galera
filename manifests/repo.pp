@@ -29,7 +29,10 @@ class galera::repo(
   # Ubuntu-Debian/codership
   $apt_codership_repo_location = $::operatingsystem ? {
     'Debian' => 'http://releases.galeracluster.com/galera-3/debian',
-    default  => 'http://releases.galeracluster.com/galera-3/ubuntu',
+    default => $::operatingsystemrelease ? {
+      '14.04' => 'http://releases.galeracluster.com/galera-3.25/ubuntu',
+      default  => 'http://releases.galeracluster.com/galera-3/ubuntu',
+    },
   },
   $apt_codership_wsrep_repo_location = $::operatingsystem ? {
     'Debian' => "http://releases.galeracluster.com/mysql-wsrep-${galera::vendor_version}/debian",
