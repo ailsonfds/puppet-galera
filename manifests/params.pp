@@ -13,6 +13,8 @@ class galera::params {
     ) {
       # We have systemd and we should use the binary
       $bootstrap_command = '/usr/bin/galera_new_cluster'
+    } elsif $::operatingsystemrelease == '14.04' {
+      $bootstrap_command = '/etc/init.d/mysql bootstrap'
     } else {
       $bootstrap_command = '/usr/bin/mysqld_bootstrap'
     }
