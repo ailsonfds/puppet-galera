@@ -13,7 +13,7 @@ class galera::params {
     ) {
       # We have systemd and we should use the binary
       $bootstrap_command = '/usr/bin/galera_new_cluster'
-    } elsif $::operatingsystemrelease == '14.04' {
+    } elsif $::operatingsystem == 'Ubuntu' {
       $bootstrap_command = '/etc/init.d/mysql bootstrap'
     } else {
       $bootstrap_command = '/usr/bin/mysqld_bootstrap'
@@ -111,11 +111,11 @@ class galera::params {
       $libgalera_location = '/usr/lib/galera/libgalera_smm.so'
     }
     elsif $galera::vendor_type == 'codership' {
-      if $galera::vendor_version == /^5.6/ {
+      if $galera::vendor_version =~ /^5.6/ {
         $mysql_package_name_internal = 'mysql-wsrep-server-5.6'
         $client_package_name_internal = 'mysql-wsrep-client-5.6'
       }
-      elsif $galera::vendor_version == /^5.7/ {
+      elsif $galera::vendor_version =~ /^5.7/ {
         $mysql_package_name_internal = 'mysql-wsrep-server-5.7'
         $client_package_name_internal = 'mysql-wsrep-client-5.7'
       }
