@@ -13,7 +13,7 @@ class galera::params {
     ) {
       # We have systemd and we should use the binary
       $bootstrap_command = '/usr/bin/galera_new_cluster'
-    } elsif $::operatingsystem == 'Ubuntu' {
+    } elsif ($::operatingsystem == 'Ubuntu' and $galera::vendor_version =~ /^5.[56]/) {
       $bootstrap_command = '/etc/init.d/mysql bootstrap'
     } else {
       $bootstrap_command = '/usr/bin/mysqld_bootstrap'
